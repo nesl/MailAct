@@ -3,10 +3,23 @@ MailAct
 
 A service for performing actions based on emails.
 
+Setup
+-----
+
+See SETUP.md for instructions to Install and Setup MailAct
+
+[SETUP.md](SETUP.md)
+
 Configurator
 ------------
 
 Module for setting up MailAct for a user.
+
+### Configuration File
+
+See CONFIG.md for information on the format of the configuration file that is passed to the Configurator module.
+
+[CONFIG.md](CONFIG.md)
 
 ### Usage
 
@@ -36,13 +49,13 @@ This module is called by Procmail, so a typical user should not run this module 
 
 ### Usage
 
-    ./EmailProcessor.py user_account_name sensor_name
+    ./EmailProcessor.py USER_ACCOUNT_NAME SENSOR_NAME
     
 #### Required (positional) arguments:
 
-__user_account_name__: This is the user's email address with non-alphanumeric characters replaced with underscores
+__USER_ACCOUNT_NAME__: This is the user's email address with non-alphanumeric characters replaced with underscores
 
-__sensor_name__: A particular sensor that is defined in the configuration file passed to the Configurator module
+__SENSOR_NAME__: A particular sensor that is defined in the configuration file passed to the Configurator module
 
 #### Additional notes:
 
