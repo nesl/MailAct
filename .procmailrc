@@ -1,0 +1,9 @@
+VERBOSE=yes
+SHELL=/bin/bash
+MAILDIR=$HOME/mail
+PMDIR=$HOME/.procmail
+LOGFILE=$PMDIR/log
+
+PYTHON=/usr/bin/python
+EMAIL_RECV=$HOME/mail_act/email_recv/email_recv.py
+
