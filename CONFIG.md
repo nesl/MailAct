@@ -102,3 +102,78 @@ extraction references (defined above).
 
 Provided Actions
 ----------------
+
+There are many helper functions provided by MailAct to help users get started with performing actions. 
+Of course, users can create their own functions in the optional Python file that is passed to the Configurator. 
+
+### Converting Strings to Values
+
+#### _maStrToIndex(str_to_match, str1, [str2, …])_
+
+Convert a string to a value based on an indexing scheme that starts from 0.
+
+##### Examples
+
+    >>> maStrToIndex('Keychain', 'Keychain', 'Password', 'Garage Opener')
+    0
+    
+    >>> maStrToIndex('Password', 'Keychain', 'Password', 'Garage Opener')
+    1
+    
+#### _maStrToInt(str_to_match, str1, value1, [str2, value2, …])_
+
+Convert a string to a value based on one or more key-value pairs.
+
+##### Examples
+
+    >>> maStrToInt('Armed', 'Armed', 1, 'Disarmed', 0, 'Unknown', -1)
+    1
+    
+    >>> maStrToInt('Disarmed', 'Armed', 1, 'Disarmed', 0, 'Unknown', -1)
+    0
+    
+### Timestamps
+
+There are four formats of time that operations can be performed on
+
+- __Struct__: Time expressed in the _struct_time_ format of the Python _time_ module
+- __Epoch__: Time in seconds since the Unix Epoch (midnight UTC on January 1, 1970)
+- __Asc__: Time as an ascii string as returned by Python time.ctime()
+- __Cosm__: Time as an ascii string formatted in the format accepted by Cosm (ISO 8601)
+
+#### _maGetTime*()_
+
+Get current time (system's time)
+
+##### Examples
+    >>> maGetTimeEpoch()
+    1369170987.880371
+    
+    >>> maGetTimeAsc()
+    'Tue May 21 21:16:30 2013'
+    
+    >>> maGetTimeCosm()
+    '2013-05-21T21:16:31Z'
+
+#### _maGetEmailDateTime*()_
+
+Get time from email's "date" header
+
+#### _maAddSecsTo*(time, secs)_
+
+Add _secs_ seconds to _time_. Note that _time_ must be in the same format as *.
+
+##### Examples
+    >>> x = 1369170987.880371
+    >>> maAddSecsToEpoch(x, 5)
+    1369170992.880371
+    
+    >>> y = 'Tue May 21 21:16:30 2013'
+    >>> maAddSecsToAsc(y, 8)
+    'Tue May 21 21:16:38 2013'
+    
+    >>> z = '2013-05-21T21:16:31Z'
+    >>> maAddSecsToCosm(z, 600)
+    '2013-05-21T21:26:31Z'
+
+
