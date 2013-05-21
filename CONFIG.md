@@ -1,7 +1,9 @@
-MailAct Config Format
-=====================
+MailAct Configuration File
+==========================
 
 This file describes the format of the configuration file that is passed to the MailAct Configurator Module.
+
+It also provides a list of Actions that are provided by MailAct for use in the configuration file.
 
 Example Configuration File
 ---------------------------
@@ -100,8 +102,8 @@ Lastly, each sensor has one or more action lists.
 - The arguments to functions can be numbers, strings, variables (if defined in a previous action line) or 
 extraction references (defined above).
 
-Provided Actions
-----------------
+Actions Included with MailAct
+-----------------------------
 
 There are many helper functions provided by MailAct to help users get started with performing actions. 
 Of course, users can create their own functions in the optional Python file that is passed to the Configurator. 
@@ -175,5 +177,40 @@ Add _secs_ seconds to _time_. Note that _time_ must be in the same format as *.
     >>> z = '2013-05-21T21:16:31Z'
     >>> maAddSecsToCosm(z, 600)
     '2013-05-21T21:26:31Z'
+
+### Cosm
+
+These functions can be used to upload data to Cosm.
+
+#### _maCreateDatapoint(timestamp, value)_
+
+Create a Cosm Datapoint by providing a timestamp and value
+
+#### _maAppendDatapoint(datapoints, timestamp, value)_
+
+Append a new timestamp and value pair to a previously created Datapoint that was created using _maCreateDatapoint_.
+
+#### _maCosmSend(feedid, datastream, datapoints, [apikey])_
+
+Upload Datapoints to Cosm by providing the Feed ID, Datastream, Datapoints and API key. API key is optional. 
+If no API key is provided, the global API key (provided in the configuration file) will be used. 
+Datapoints should be created by using the _maCreateDatapoint_ and _maAppendDatapoint_ helper functions. 
+User can create their own if desired as it is just a list of timestamp and value pairs.
+
+#### Example
+
+The following is an example of using many of the actions above to upload a door event to Cosm. 
+The email arrival date is used as the timestamp for the door event and a value of 1 is used for this time. 
+The timestamp one second before and one second after are set to 0 to create a clean edge. Thus, 3 datapoints 
+are uploaded to Cosm.
+
+    date0 = maGetEmailDateTimeCosm()
+    datapoints = maCreateDatapoint(date0, 1)
+    date1 = maAddSecsToCosm(date0, -1)
+    datapoints = maAppendDatapoint(datapoints, date1, 0)
+    date2 = maAddSecsToCosm(date0, 1)
+    datapoints = maAppendDatapoint(datapoints, date2, 0)
+    maCosmSend(123456, 'Door', datapoints, 'OPTIONAL_APIKEY')
+    
 
 
