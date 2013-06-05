@@ -337,7 +337,7 @@ def configureActions(action_list, extractions):
 		# NOTE: could use csv module instead but has issues with quotes in quotes
 		if ',' in action_args_str:
 			action_args =  action_args_str.split(',')
-		else: # single argument
+		elif action_args_str: # single argument
 			action_args =  [action_args_str]
 		# NOTE: arguments are not split properly yet, since there could be comma in quotes
 
