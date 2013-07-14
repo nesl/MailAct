@@ -265,15 +265,20 @@ def createIncludeRC(email, sensor_list, type=1):
 		for match in sensor.match_crit:
 			# Set flags (check if need body flag)
 			if 'Body' in match or 'body' in match: 
-				 outlines.append(':0Bc')
+				 outlines.append(':0HBc')
 			else:
 				 outlines.append(':0c')
 			# Iterate through matching headers
 			for header, value in match.items():
-				if value != '':
+				if value != '' and header != 'Body' and header != 'body':
 					# TODO: in docs, note that '.*' is assumed before header's value
 					# NOTE: this may be similar to perl, since matches any part of line
 					outlines.append('* ^' + header + ':.*' + value)
+			for header, value in match.items():
+				if value != '' and (header == 'Body' or header == 'body'):
+					# TODO: in docs, note that '.*' is assumed before header's value
+					# NOTE: this may be similar to perl, since matches any part of line
+					outlines.append('* ^.*' + value)
 
 			# Python call
 			outlines.append(PYTHON_CALL)
