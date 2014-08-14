@@ -42,13 +42,15 @@ to run MailAct
 
 ### Alternative Approach: Installing MailAct on an Existing Linux Machine
 
-Make sure that you have Python, Fetchmail and Procmail installed. Next, download MailAct from https://github.com/nesl/MailAct/archive/master.zip. Unzip and move the resulting folder to your home directory with the name MailAct. The following sequence of commands will do the trick: 
+Make sure that you have Python, Fetchmail and Procmail installed. Next, download MailAct from https://github.com/nesl/MailAct/archive/master.zip. Unzip and move the resulting folder to your home directory with the name MailAct. Also, create directories called mail and .procmail under the home directory.The following sequence of commands will do the trick: 
 
     curl -O https://codeload.github.com/nesl/MailAct/zip/master
     mv master master.zip
     unzip master.zip
     mv MailAct-master $HOME/MailAct
     rm master.zip
+    mkdir $HOME/mail
+    mkdir $HOME/.procmail
 
 2. Configure MailAct
 ----------------------
