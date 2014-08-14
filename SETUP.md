@@ -40,6 +40,16 @@ Note that the user will be asked to provide a password for the account.
 This script will create the user's home directory and create the necessary files with the required permissions 
 to run MailAct
 
+### Alternative Approach: Installing MailAct on an Existing Linux Machine
+
+Make sure that you have Python, Fetchmail and Procmail installed. Next, download MailAct from https://github.com/nesl/MailAct/archive/master.zip. Unzip and move the resulting folder to your home directory with the name MailAct. The following sequence of commands will do the trick: 
+
+    curl -O https://codeload.github.com/nesl/MailAct/zip/master
+    mv master master.zip
+    unzip master.zip
+    mv MailAct-master $HOME/MailAct
+    rm master.zip
+
 2. Configure MailAct
 ----------------------
 
@@ -130,3 +140,9 @@ If an action failed due to an exception (e.g. SyntaxError), the log file will st
 
 If a process (action list) did not complete by the timeout, this file will be created and will list all the actions. 
 This way they can be re-run by another process later.
+
+
+4. Making it work with GMail
+----------------------------
+
+MailAct uses Fetchmail to download emails. If you get authorization failure, you may need to enable IMAP access to GMail by less secure clients by visiting http://support.google.com/mail/accounts/bin/answer.py?answer=78754.
