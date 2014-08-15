@@ -78,7 +78,7 @@ if __name__ == "__main__":
 
 		# Restart (Start) fetchmail
 		subprocess.call("fetchmail --quit", shell=True)
-		subprocess.call("fetchmail", shell=True)
+		subprocess.call("fetchmail -L $HOME/logs/fetchmail.log", shell=True)
 	
 	print 'Account directory set up at ' + USERS_DIR + email_name
 
